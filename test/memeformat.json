@@ -1,0 +1,15 @@
+{
+  "happy": [
+    "When you get slightly above average on a test",
+    "When you see your professor in public"
+  ],
+  "sad": [
+    "When you get an 89.4% in a class",
+    "When you take a Pattis test"
+  ],
+  "surprised": [
+    "When you get surprised",
+    "Boo!",
+    "When feet man is at your window"
+  ]
+}
