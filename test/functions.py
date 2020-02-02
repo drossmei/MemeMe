@@ -92,3 +92,11 @@ def textOverlay(frame, text:tuple, width, height):
     font = cv2.FONT_HERSHEY_DUPLEX
     cv2.putText(frame, text[0], (int(width//2)-(cv2.getTextSize(text[0], font, 1, 1)[0][0]//2), cv2.getTextSize(text[0], font, 1, 1)[0][1] + 20), font, 1, (200, 200, 200), 2, cv2.LINE_AA)
     cv2.putText(frame, text[1], (10, int(height)-20), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
+
+
+def widen() -> None:
+    img = cv2.imread("test.png")
+    wide_img = cv2.resize(img, None, fx = 1, fy = 4/7)
+    cv2.imshow("stretch-wide", wide_img)
+    cv2.waitKey(0)
+    dv2.destroyAllWindows()
