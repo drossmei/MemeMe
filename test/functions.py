@@ -103,7 +103,7 @@ def blush(frame, faces,  blush_img, animeeyes_img):
 def surgeon_mask(frame, faces,  glasses_img):
     for (x, y, w, h) in faces:
         if h > 0 and w > 0:
-            glass_symin = int(y + 1.5 * h / 5)
+            glass_symin = int(y + 2 * h / 5)
             glass_symax = int(y + 6 * h / 5)
             sh_glass = glass_symax - glass_symin
 
