@@ -25,6 +25,7 @@ def transparentOverlay(src, overlay, pos=(0, 0), scale=1):
 def invert(frame):
     return cv2.bitwise_not(frame)
 
+
 # source: https://www.youtube.com/watch?v=zHNj1gAOoCY
 def glasses(frame, faces,  glasses_img):
     for (x, y, w, h) in faces:
@@ -38,6 +39,7 @@ def glasses(frame, faces,  glasses_img):
             glasses = cv2.resize(glasses_img, (w, sh_glass),interpolation=cv2.INTER_AREA)
             transparentOverlay(face_glass_roi_color,glasses)
 
+
 def crying(frame, faces,  crying_img):
     for (x, y, w, h) in faces:
         if h > 0 and w > 0:
@@ -49,6 +51,7 @@ def crying(frame, faces,  crying_img):
 
             crying = cv2.resize(crying_img, (w, sh_glass),interpolation=cv2.INTER_AREA)
             transparentOverlay(face_glass_roi_color,crying)
+
 
 # source: https://www.youtube.com/watch?v=MVLuexuikv4
 def red_eye(frame, redeye_img, faces, intensity=.5, red=230, green=0, blue=10):
@@ -77,6 +80,27 @@ def red_eye(frame, redeye_img, faces, intensity=.5, red=230, green=0, blue=10):
     return frame
 
 
+def blush(frame, faces,  blush_img, animeeyes_img):
+    for (x, y, w, h) in faces:
+        if h > 0 and w > 0:
+            glass_symin = int(y + 2.2 * h / 5)
+            glass_symax = int(y + 4.1 * h / 5)
+            sh_glass = glass_symax - glass_symin
+            face_glass_roi_color = frame[glass_symin:glass_symax, x:x+w]
+            blushes = cv2.resize(blush_img, (w, sh_glass),interpolation=cv2.INTER_AREA)
+            transparentOverlay(face_glass_roi_color,blushes)
+    for (x, y, w, h) in faces:
+        if h > 0 and w > 0:
+            # smaller average = higher
+            glass_symin = int(y + 1.2 * h / 5)
+            glass_symax = int(y + 2.4 * h / 5)
+            sh_glass = glass_symax - glass_symin
+            face_glass_roi_color = frame[glass_symin:glass_symax, x:x+w]
+            eyes = cv2.resize(animeeyes_img, (w, sh_glass),interpolation=cv2.INTER_AREA)
+            transparentOverlay(face_glass_roi_color,eyes)
+
+
+
 # opens MemeMe'd.png
 def openImage() -> None:
     try:
@@ -89,12 +113,4 @@ def openImage() -> None:
 def textOverlay(frame, text:tuple, width, height):
     font = cv2.FONT_HERSHEY_DUPLEX
     cv2.putText(frame, text[0], (int(width//2)-(cv2.getTextSize(text[0], font, 1, 1)[0][0]//2), cv2.getTextSize(text[0], font, 1, 1)[0][1] + 20), font, 1, (200, 200, 200), 2, cv2.LINE_AA)
-    cv2.putText(frame, text[1], (10, int(height)-20), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
-
-
-def widen() -> None:
-    img = cv2.imread("MemeMe'd.png")
-    wide_img = cv2.resize(img, None, fx = 1, fy = 4/7)
-    cv2.imshow("stretch-wide", wide_img)
-    cv2.waitKey(0)
-    dv2.destroyAllWindows()
+    cv2.putText(frame, text[1], (int(width//2)-(cv2.getTextSize(text[1], font, 1, 1)[0][0]//2), int(height)-20), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
