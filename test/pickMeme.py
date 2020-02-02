@@ -2,7 +2,7 @@ from random import randint
 import json
 
 # parse json file
-with open('memeformat.json') as j:
+with open('test/memeformat.json') as j:
     data = json.load(j)
 
 cache = []
