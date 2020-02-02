@@ -100,6 +100,18 @@ def blush(frame, faces,  blush_img, animeeyes_img):
             transparentOverlay(face_glass_roi_color,eyes)
 
 
+def surgeon_mask(frame, faces,  glasses_img):
+    for (x, y, w, h) in faces:
+        if h > 0 and w > 0:
+            glass_symin = int(y + 1.5 * h / 5)
+            glass_symax = int(y + 6 * h / 5)
+            sh_glass = glass_symax - glass_symin
+
+            face_glass_roi_color = frame[glass_symin:glass_symax, x:x+w]
+
+            glasses = cv2.resize(glasses_img, (w, sh_glass),interpolation=cv2.INTER_AREA)
+            transparentOverlay(face_glass_roi_color,glasses)
+
 
 # opens MemeMe'd.png
 def openImage() -> None:

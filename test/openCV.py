@@ -13,6 +13,9 @@ def main(emotion="random"):
     redeye_img = cv2.imread('test/images/redeye.png', -1)
     blush_img = cv2.imread('test/images/blush.png', -1)
     animeeyes_img = cv2.imread('test/images/animeeyes.png', -1)
+    surg_mask_img = cv2.imread('test/images/surgeon_mask.png', -1)
+
+
     imgGlassesGray = cv2.cvtColor(glasses_img, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier('test/data/haarcascade_frontalface_alt2.xml')
 
@@ -37,6 +40,8 @@ def main(emotion="random"):
             glasses(store_frame, faces, glasses_img)
         elif (emotion == "kawaii"):
             blush(store_frame, faces, blush_img, animeeyes_img)
+        elif (emotion == "sick"):
+            surgeon_mask(store_frame, faces, surg_mask_img)
 
 
     while True:
