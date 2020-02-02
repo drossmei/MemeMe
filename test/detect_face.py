@@ -24,11 +24,11 @@ while(True):
         # test_img = "test_img.jpg"
         # cv2.imwrite(test_img, roi_gray)
 
-    color = (0, 0, 255) # (BGR) idk why it isn't (RGB)
-    thickness = 2
-    x1 = x + w
-    y1 = y + h
-    cv2.rectangle(frame, (x,y), (x1,y1), color, thickness)
+        color = (0, 0, 255) # (BGR) idk why it isn't (RGB)
+        thickness = 2
+        x1 = x + w
+        y1 = y + h
+        cv2.rectangle(frame, (x,y), (x1,y1), color, thickness)
     
     # display frame
     cv2.imshow('frame', frame)
