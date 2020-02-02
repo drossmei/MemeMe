@@ -1,34 +1,32 @@
 {
   "happy": [
-    "When you get slightly above average on a test",
-    "When you see your professor in public"
+    "When HackUCI staff brings out the food"
   ],
   "surprised": [
-    "Boo!",
-    "When feet man is at your window"
+    "When they spell your name right at Starbucks"
   ],
   "wide-eyed": [
-    "Look at yourself"
+    "Look at yourself",
+    "Made you look!"
   ],
 
 
 
   "badass": [
     "When you correct the professor",
-    "When you attend lecture for the first time this quarter"
+    "When your code runs first try without errors"
   ],
   "cat": [
-    "uwu"
+    "Do you wanna hear a cat joke? Just kitten, don't have one right meow"
   ],
   "kawaii": [
-    "When Pattis-sensei notices you"
+    "feeling kinda cute... might delete later idk" 
   ],
   "sad": [
-    "When you get an 89.4% in a class",
-    "When you take a Pattis test"
+    "When you realize tomorrrow is Monday"
   ],
   "sick": [
-    "Y'all already know"
-  ]
+    "When you hear someone around you start coughing"
+    ]
 
 }
