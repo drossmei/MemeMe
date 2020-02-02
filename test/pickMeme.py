@@ -5,7 +5,6 @@ import json
 with open('memeformat.json') as j:
     data = json.load(j)
 
-emotions = list(data.keys())
 cache = []
 
 def random_emotion_string(e:list)->str:
@@ -20,8 +19,9 @@ def random_caption_string(emotion:str)->str:
     return data[emotion][random_num]
 
 
-def chooseMeme(emotions)->str:
+def chooseMeme()->(str,str):
     ''' Chooses a phrase for the caption '''
+    emotions = list(data.keys())
     emotion = random_emotion_string(emotions)
     caption = random_caption_string(emotion)
 
@@ -32,7 +32,7 @@ def chooseMeme(emotions)->str:
     limit_and_reset(cache)
     cache.append(caption)
 
-    return caption
+    return (emotion, caption)
 
 
 def limit_and_reset(cache):
