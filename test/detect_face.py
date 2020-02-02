@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_alt2.xml')
+face_cascade = cv2.CascadeClassifier('test/haarcascades/haarcascade_frontalface_alt2.xml')
 
 cap = cv2.VideoCapture(0)
 
@@ -13,7 +13,7 @@ while(True):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
     # detects face
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=1)
     
     # prints out regions of interest
     for (x, y, w, h) in faces:
@@ -24,11 +24,11 @@ while(True):
         # test_img = "test_img.jpg"
         # cv2.imwrite(test_img, roi_gray)
 
-    color = (0, 0, 255) # (BGR) idk why it isn't (RGB)
-    thickness = 2
-    x1 = x + w
-    y1 = y + h
-    cv2.rectangle(frame, (x,y), (x1,y1), color, thickness)
+        color = (0, 0, 255) # (BGR) idk why it isn't (RGB)
+        thickness = 2
+        x1 = x + w
+        y1 = y + h
+        cv2.rectangle(frame, (x,y), (x1,y1), color, thickness)
     
     # display frame
     cv2.imshow('frame', frame)
