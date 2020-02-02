@@ -9,9 +9,6 @@ root.title("MemeMe")
 
 emotions = data.keys()
 
-def clicked():
-    main()
-
 #Intialize Title Label
 titleLabel = Label(root, text="MemeMe", font=("Courier", 44))
 titleLabel.pack()
@@ -28,6 +25,9 @@ memeCombo['values'] = sorted(c for c in emotions)
 memeCombo.current(0)
 memeCombo.pack(pady=10)
 
+def clicked():
+    emot = memeCombo.get()
+    main(emot)
 
 #Initialize Weather Button 
 memeBtn = Button(root, text="Memeify", width=20, command=clicked)

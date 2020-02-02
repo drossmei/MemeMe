@@ -1,9 +1,9 @@
 import cv2
 from functions import *
-from pickMeme import chooseMeme, data
+from pickMeme import chooseMeme, data, random_caption_string
 
     
-def main():
+def main(emotion="random"):
     # Initialize Camera
     cam = cv2.VideoCapture(0)
 
@@ -15,9 +15,14 @@ def main():
     face_cascade = cv2.CascadeClassifier('test/data/haarcascade_frontalface_alt2.xml')
 
     # find emotion and caption and image filter
-    temp = chooseMeme()
-    emotion = temp[0]
-    caption = temp[1]
+
+    caption = ""
+    if (emotion == "random"): # randomize caption and emotion
+        temp = chooseMeme()
+        emotion = temp[0]
+        caption = temp[1]
+    else:
+        caption = random_caption_string(emotion)
 
     def applyFilter(store_frame, faces, emotion):
         if (emotion == "happy"):
