@@ -14,7 +14,7 @@ def main(emotion="random"):
     blush_img = cv2.imread('test/images/blush.png', -1)
     animeeyes_img = cv2.imread('test/images/animeeyes.png', -1)
     surg_mask_img = cv2.imread('test/images/surgeon_mask.png', -1)
-
+    cat_img = cv2.imread('test/images/cat.png', -1)
 
     imgGlassesGray = cv2.cvtColor(glasses_img, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier('test/data/haarcascade_frontalface_alt2.xml')
@@ -32,16 +32,20 @@ def main(emotion="random"):
     def applyFilter(store_frame, faces, emotion):
         if (emotion == "happy"):
             pass
-        if (emotion == "sad"):
-            crying(store_frame, faces, crying_img)
         elif (emotion == "surpised"):
             pass
+        
+        # has filter
+        elif (emotion == "sad"):
+            crying(store_frame, faces, crying_img)
         elif (emotion == "badass"):
             glasses(store_frame, faces, glasses_img)
         elif (emotion == "kawaii"):
             blush(store_frame, faces, blush_img, animeeyes_img)
         elif (emotion == "sick"):
             surgeon_mask(store_frame, faces, surg_mask_img)
+        elif (emotion == "cat"):
+            cat(store_frame, faces, cat_img)
 
 
     while True:
