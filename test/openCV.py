@@ -34,7 +34,7 @@ def main(emotion="random"):
             pass
         elif (emotion == "surpised"):
             pass
-        elif (emoticon == "wide-eyed")
+        elif (emotion == "wide-eyed"):
             pass
         
         # has filter
