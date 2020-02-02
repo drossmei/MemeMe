@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+from typing import *
+
 
 # source: https://www.youtube.com/watch?v=MVLuexuikv4
 def invert(frame):
@@ -82,3 +84,12 @@ def textOverlay(frame, text, width, height):
     font = cv2.FONT_HERSHEY_DUPLEX
     cv2.putText(frame, text[0], (int(width//2)-(cv2.getTextSize(text[0], font, 1, 1)[0][0]//2), cv2.getTextSize(text[0], font, 1, 1)[0][1] + 20), font, 1, (200, 200, 200), 2, cv2.LINE_AA)
     cv2.putText(frame, text[1], (10, int(height)-20), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
+
+
+# opens MemeMe'd.png
+def openImage() -> None:
+    try:
+        img = Image.open("MemeMe'd.png")
+        img.show()
+    except:
+        raise "MemeMe'd.png does not exist."
