@@ -6,8 +6,10 @@ from openCV import main, data
 # initialize tkinter
 root = Tk()
 root.title("MemeMe")
+root.geometry('350x450')
 
-emotions = data.keys()
+emotions = list(data.keys())
+emotions.append('random')
 
 #Intialize Title Label
 titleLabel = Label(root, text="MemeMe", font=("Courier", 44))
@@ -20,7 +22,7 @@ emotionLabel.pack(pady=10)
 
 
 #Initialize Drop Down Menu
-memeCombo = Combobox(root)
+memeCombo = Combobox(root, state="readonly")
 memeCombo['values'] = sorted(c for c in emotions)
 memeCombo.current(0)
 memeCombo.pack(pady=10)
@@ -29,7 +31,7 @@ def clicked():
     emot = memeCombo.get()
     main(emot)
 
-#Initialize Weather Button 
+#Initialize Meme Button 
 memeBtn = Button(root, text="Memeify", width=20, command=clicked)
 memeBtn.pack(pady=10)
 

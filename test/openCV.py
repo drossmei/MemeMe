@@ -34,7 +34,7 @@ def main(emotion="random"):
             pass
         if (emotion == "sad"):
             crying(store_frame, faces, crying_img)
-        elif (emotion == "surpised"):
+        elif (emotion == "surprised"):
             pass
         elif (emotion == "badass"):
             glasses(store_frame, faces, glasses_img)
