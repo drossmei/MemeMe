@@ -3,10 +3,6 @@
     "When you get slightly above average on a test",
     "When you see your professor in public"
   ],
-  "sad": [
-    "When you get an 89.4% in a class",
-    "When you take a Pattis test"
-  ],
   "surprised": [
     "Boo!",
     "When feet man is at your window"
@@ -14,17 +10,25 @@
   "wide-eyed": [
     "Look at yourself"
   ],
+
+
+
   "badass": [
-    "When you correct the professor"
+    "When you correct the professor",
+    "When you attend lecture for the first time this quarter"
+  ],
+  "cat": [
+    "uwu"
   ],
   "kawaii": [
     "When Pattis-sensei notices you"
   ],
+  "sad": [
+    "When you get an 89.4% in a class",
+    "When you take a Pattis test"
+  ],
   "sick": [
     "Y'all already know"
   ]
-  ,
-  "cat": [
-    "uwu"
-  ]
+
 }
