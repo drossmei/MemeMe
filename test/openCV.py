@@ -11,6 +11,8 @@ def main(emotion="random"):
     glasses_img = cv2.imread('test/images/glasses2.png', -1)
     crying_img = cv2.imread('test/images/cryingeyes.png', -1)
     redeye_img = cv2.imread('test/images/redeye.png', -1)
+    blush_img = cv2.imread('test/images/blush.png', -1)
+    animeeyes_img = cv2.imread('test/images/animeeyes.png', -1)
     imgGlassesGray = cv2.cvtColor(glasses_img, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier('test/data/haarcascade_frontalface_alt2.xml')
 
@@ -33,6 +35,8 @@ def main(emotion="random"):
             pass
         elif (emotion == "badass"):
             glasses(store_frame, faces, glasses_img)
+        elif (emotion == "kawaii"):
+            blush(store_frame, faces, blush_img, animeeyes_img)
 
 
     while True:
@@ -57,7 +61,14 @@ def main(emotion="random"):
         if k%256 == 32:
             # SPACE pressed
             applyFilter(store_frame, faces, emotion)
-            textOverlay(store_frame, (caption,""), width, height)
+            
+            # split caption in half
+            t = caption.split(" ")
+            half_num = len(t)//2
+            s1 = " ".join(t[:half_num])
+            s2 = " ".join(t[half_num:])
+
+            textOverlay(store_frame, (s1, s2), width, height)
             cv2.imwrite("MemeMe'd.png", store_frame)
             print("Saving Image...")
             break
