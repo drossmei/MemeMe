@@ -1,6 +1,25 @@
 import cv2
 import numpy as np
 from typing import *
+from PIL import Image
+
+# helper method
+
+def transparentOverlay(src, overlay, pos=(0, 0), scale=1):
+    overlay = cv2.resize(overlay, (0, 0), fx=scale, fy=scale)
+    h, w, _ = overlay.shape  # Size of foreground
+    rows, cols, _ = src.shape  # Size of background Image
+    y, x = pos[0], pos[1]  # Position of foreground/overlay image
+
+    # loop over all pixels and apply the blending equation
+    for i in range(h):
+        for j in range(w):
+            if x + i >= rows or y + j >= cols:
+                continue
+            alpha = float(overlay[i][j][3] / 255.0)  # read the alpha channel
+            src[x + i][y + j] = alpha * overlay[i][j][:3] + (1 - alpha) * src[x + i][y + j]
+    return src
+
 
 # source: https://www.youtube.com/watch?v=MVLuexuikv4
 def invert(frame):
@@ -8,23 +27,8 @@ def invert(frame):
 
 # source: https://www.youtube.com/watch?v=zHNj1gAOoCY
 def glasses(frame, faces,  glasses_img):
-    def transparentOverlay(src, overlay, pos=(0, 0), scale=1):
-        overlay = cv2.resize(overlay, (0, 0), fx=scale, fy=scale)
-        h, w, _ = overlay.shape  # Size of foreground
-        rows, cols, _ = src.shape  # Size of background Image
-        y, x = pos[0], pos[1]  # Position of foreground/overlay image
-    
-        # loop over all pixels and apply the blending equation
-        for i in range(h):
-            for j in range(w):
-                if x + i >= rows or y + j >= cols:
-                    continue
-                alpha = float(overlay[i][j][3] / 255.0)  # read the alpha channel
-                src[x + i][y + j] = alpha * overlay[i][j][:3] + (1 - alpha) * src[x + i][y + j]
-        return src
     for (x, y, w, h) in faces:
         if h > 0 and w > 0:
-
             glass_symin = int(y + 0.5 * h / 5)
             glass_symax = int(y + 3.6 * h / 5)
             sh_glass = glass_symax - glass_symin
@@ -35,23 +39,8 @@ def glasses(frame, faces,  glasses_img):
             transparentOverlay(face_glass_roi_color,glasses)
 
 def crying(frame, faces,  crying_img):
-    def transparentOverlay(src, overlay, pos=(0, 0), scale=1):
-        overlay = cv2.resize(overlay, (0, 0), fx=scale, fy=scale)
-        h, w, _ = overlay.shape  # Size of foreground
-        rows, cols, _ = src.shape  # Size of background Image
-        y, x = pos[0], pos[1]  # Position of foreground/overlay image
-    
-        # loop over all pixels and apply the blending equation
-        for i in range(h):
-            for j in range(w):
-                if x + i >= rows or y + j >= cols:
-                    continue
-                alpha = float(overlay[i][j][3] / 255.0)  # read the alpha channel
-                src[x + i][y + j] = alpha * overlay[i][j][:3] + (1 - alpha) * src[x + i][y + j]
-        return src
     for (x, y, w, h) in faces:
         if h > 0 and w > 0:
-
             glass_symin = int(y + 1 * h / 5)
             glass_symax = int(y + 3.6 * h / 5)
             sh_glass = glass_symax - glass_symin
@@ -62,14 +51,23 @@ def crying(frame, faces,  crying_img):
             transparentOverlay(face_glass_roi_color,crying)
 
 # source: https://www.youtube.com/watch?v=MVLuexuikv4
-def red_overlay(frame, intensity=.5, red=230, green=0, blue=10):
+def red_eye(frame, redeye_img, faces, intensity=.5, red=230, green=0, blue=10):
+    for (x, y, w, h) in faces:
+        if h > 0 and w > 0:
+            glass_symin = int(y - 1 * h / 5)
+            glass_symax = int(y + 4.5 * h / 5)
+            sh_glass = glass_symax - glass_symin
+
+            face_glass_roi_color = frame[glass_symin:glass_symax, x:x+w]
+
+            redeye = cv2.resize(redeye_img, (w, sh_glass),interpolation=cv2.INTER_AREA)
+            transparentOverlay(face_glass_roi_color,redeye)
     def verify_alpha_channel(frame):
         try:
             frame.shape[3] # looking for the alpha channel
         except IndexError:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
         return frame
-
     frame = verify_alpha_channel(frame)
     frame_h, frame_w, frame_c = frame.shape
     color_bgra = (blue, green, red, 1)
