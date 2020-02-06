@@ -8,6 +8,8 @@ This program will display a "memeified" version of a user's face.
   * in a terminal type "pip install opencv-python"
 * Tkinter
   * "pip install python-tk"
+* Pillow
+  * "pip install Pillow"
 * The ability to feel emotions
 
 ### How to run
